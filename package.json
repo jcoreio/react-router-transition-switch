@@ -102,7 +102,7 @@
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^15.6.1",
     "rimraf": "^2.5.4",
-    "semantic-release": "^6.3.6",
+    "semantic-release": "^7.0.2",
     "validate-commit-msg": "^2.8.2"
   },
   "peerDependencies": {

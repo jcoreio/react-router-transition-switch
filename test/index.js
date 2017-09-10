@@ -22,9 +22,9 @@ describe('react-router-better-switch', () => {
     const comp = mount(
       <Router history={history}>
         <Switch render={render}>
-          <Route exact path="/" component={Home}/>
-          <Route path="/about" component={About}/>
-          <Route path="/account" component={Account}/>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/account" component={Account} />
         </Switch>
       </Router>
     )
@@ -51,9 +51,9 @@ describe('react-router-better-switch', () => {
     const comp = mount(
       <Router history={history}>
         <Switch render={render}>
-          <Route key={0} exact path="/" component={Home}/>
-          <Route key={1} path="/about" component={About}/>
-          <Route key={2} path="/account" component={Account}/>
+          <Route key={0} exact path="/" component={Home} />
+          <Route key={1} path="/about" component={About} />
+          <Route key={2} path="/account" component={Account} />
         </Switch>
       </Router>
     )
