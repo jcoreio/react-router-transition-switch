@@ -1,7 +1,7 @@
 {
-  "name": "@jcoreio/react-router-better-switch",
+  "name": "react-router-transition-switch",
   "version": "0.0.0-development",
-  "description": "the way you want react-router's <Switch> to work",
+  "description": "a <Switch> variant that works with transition components",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src test stories",
