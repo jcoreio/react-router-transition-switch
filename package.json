@@ -1,7 +1,7 @@
 {
   "name": "react-router-transition-switch",
   "version": "0.0.0-development",
-  "description": "a <Switch> variant that works with transition components",
+  "description": "a <Switch> variant that's easier to use with transition components",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src test stories",
@@ -45,9 +45,9 @@
     "url": "https://github.com/jcoreio/react-router-better-switch.git"
   },
   "keywords": [
-    "es2015",
-    "react",
-    "skeleton"
+    "react-router",
+    "transitions",
+    "animation"
   ],
   "author": "Andy Edwards",
   "license": "MIT",
