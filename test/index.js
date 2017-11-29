@@ -3,6 +3,9 @@ import {Router, Route} from 'react-router-dom'
 import Switch from '../src'
 import sinon from 'sinon'
 import {mount} from 'enzyme'
+import {configure as configureEnzyme} from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+configureEnzyme({ adapter: new Adapter() })
 import {expect} from 'chai'
 import {createMemoryHistory} from 'history'
 
