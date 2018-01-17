@@ -66,6 +66,31 @@ describe('react-router-better-switch', () => {
     expect(comp.text()).to.equal('Account')
     expect(render.args[0][0].children.key).to.equal('2')
   })
+  it('uses provided createKey function if given', () => {
+    const render = sinon.spy(({children}) => children)
+
+    const Home = () => <div>Home</div>
+    const About = () => <div>About</div>
+    const Account = () => <div>Account</div>
+
+    const history = createMemoryHistory({
+      initialEntries: ['/account/profile'],
+      initialIndex: 0,
+    })
+
+    const comp = mount(
+      <Router history={history}>
+        <Switch render={render} createKey={child => child.key * 2}>
+          <Route key={0} exact path="/" component={Home} />
+          <Route key={1} path="/about" component={About} />
+          <Route key={2} path="/account" component={Account} />
+        </Switch>
+      </Router>
+    )
+
+    expect(comp.text()).to.equal('Account')
+    expect(render.args[0][0].children.key).to.equal('4')
+  })
   it('component prop works', () => {
     const render = sinon.spy(({children}) => children)
 

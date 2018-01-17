@@ -49,6 +49,8 @@ import Fader from 'react-fader'
    This way the `Fader` will only perform a transition when
    a. if you provide `key`s yourself, the matched `<Route>` has a different `key` than the last
    b. otherwise, the *matched portion* of the `location` is different from the last`
+3. You can pass it a `createKey` prop, which is a function taking the `(route, match)`
+   and returning the key to use.
 
 ## `component` example
 
@@ -114,6 +116,24 @@ React's reconciliation step.
     <Route key="orders" exact path="/orders" component={Orders} />
     <Route key="orders" path="/orders/:orderId" component={Orders} />
     <Route key="about" path="/about" component={About} />
+  </Switch>
+</Router>
+```
+
+## Forcing transitions in certain cases
+
+If you have to pass in an array of `<Route>`s, they will already have
+keys, hence changes between subroutes will not transition since
+`react-router-transition-switch` does not override existing keys with the
+`match.url`.
+
+In this case, you can use the `createKey` prop to force a unique key for
+every `match`:
+
+```js
+<Router>
+  <Switch component={Fader} createKey={(child, match) => match.url}>
+    {routes}
   </Switch>
 </Router>
 ```

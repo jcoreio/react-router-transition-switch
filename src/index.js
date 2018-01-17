@@ -13,7 +13,14 @@ class TransitionSwitch extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
-    location: PropTypes.object
+    location: PropTypes.object,
+    createKey: PropTypes.func,
+  }
+
+  static defaultProps = {
+    createKey(child, match) {
+      return child.key != null ? child.key : match.url
+    }
   }
 
   componentWillMount() {
@@ -37,7 +44,7 @@ class TransitionSwitch extends React.Component {
 
   render() {
     const { route } = this.context.router
-    const { children, render, component } = this.props
+    const { children, render, component, createKey } = this.props
     const location = this.props.location || route.location
 
     let match, child
@@ -57,7 +64,7 @@ class TransitionSwitch extends React.Component {
       ? React.cloneElement(child, {
         location,
         computedMatch: match,
-        key: child.key != null ? child.key : match.url
+        key: createKey(child, match)
       })
       : null
 
