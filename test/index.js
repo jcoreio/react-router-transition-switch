@@ -11,7 +11,7 @@ import {Router, Route} from 'react-router-dom'
 import Switch from '../src'
 import sinon from 'sinon'
 
-describe('react-router-better-switch', () => {
+describe('react-router-transition-switch', () => {
   it('render prop works', () => {
     const render = sinon.spy(({children}) => children)
 
@@ -120,4 +120,3 @@ describe('react-router-better-switch', () => {
     expect(render.args[0][0].location.pathname).to.equal('/account/profile')
   })
 })
-

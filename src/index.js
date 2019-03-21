@@ -1,16 +1,9 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
-import invariant from 'invariant'
-import {matchPath} from 'react-router'
+import {matchPath, withRouter} from 'react-router'
 
 class TransitionSwitch extends React.Component {
-  static contextTypes = {
-    router: PropTypes.shape({
-      route: PropTypes.object.isRequired
-    }).isRequired
-  }
-
   static propTypes = {
     children: PropTypes.node,
     location: PropTypes.object,
@@ -21,13 +14,6 @@ class TransitionSwitch extends React.Component {
     createKey(child, match) {
       return child.key != null ? child.key : match.url
     }
-  }
-
-  componentWillMount() {
-    invariant(
-      this.context.router,
-      'You should not use <TransitionSwitch> outside a <Router>'
-    )
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,9 +29,7 @@ class TransitionSwitch extends React.Component {
   }
 
   render() {
-    const { route } = this.context.router
-    const { children, render, component, createKey } = this.props
-    const location = this.props.location || route.location
+    const { children, render, component, createKey, location, match: routeMatch } = this.props
 
     let match, child
     React.Children.forEach(children, element => {
@@ -56,7 +40,7 @@ class TransitionSwitch extends React.Component {
 
       if (match == null) {
         child = element
-        match = path ? matchPath(location.pathname, { path, exact, strict, sensitive }) : route.match
+        match = path ? matchPath(location.pathname, { path, exact, strict, sensitive }) : routeMatch
       }
     })
 
@@ -75,4 +59,4 @@ class TransitionSwitch extends React.Component {
   }
 }
 
-export default TransitionSwitch
+export default withRouter(TransitionSwitch)
