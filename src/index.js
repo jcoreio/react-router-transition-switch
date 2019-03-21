@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 import invariant from 'invariant'
-import matchPath from 'react-router/matchPath'
+import {matchPath} from 'react-router'
 
 class TransitionSwitch extends React.Component {
   static contextTypes = {
