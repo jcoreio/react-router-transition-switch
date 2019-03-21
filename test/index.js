@@ -119,4 +119,94 @@ describe('react-router-transition-switch', () => {
     expect(render.args[0][0].match.url).to.equal('/account')
     expect(render.args[0][0].location.pathname).to.equal('/account/profile')
   })
+  it('works without component or render prop', () => {
+    const Home = () => <div>Home</div>
+    const About = () => <div>About</div>
+    const Account = () => <div>Account</div>
+
+    const history = createMemoryHistory({
+      initialEntries: ['/account/profile'],
+      initialIndex: 0,
+    })
+
+    const comp = mount(
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/account" component={Account} />
+        </Switch>
+      </Router>
+    )
+
+    expect(comp.text()).to.equal('Account')
+  })
+  it('override location works', () => {
+    const Home = () => <div>Home</div>
+    const About = () => <div>About</div>
+    const Account = () => <div>Account</div>
+
+    const history = createMemoryHistory({
+      initialEntries: ['/account/profile'],
+      initialIndex: 0,
+    })
+
+    const comp = mount(
+      <Router history={history}>
+        <Switch location={{pathname: "/about"}}>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/account" component={Account} />
+        </Switch>
+      </Router>
+    )
+
+    expect(comp.text()).to.equal('About')
+  })
+  it('renders nothing when nothing matches', () => {
+    const Home = () => <div>Home</div>
+    const About = () => <div>About</div>
+    const Account = () => <div>Account</div>
+
+    const history = createMemoryHistory({
+      initialEntries: ['/blah'],
+      initialIndex: 0,
+    })
+
+    const comp = mount(
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/account" component={Account} />
+        </Switch>
+      </Router>
+    )
+
+    expect(() => comp.text()).to.throw(Error)
+  })
+  it('supports child <Route> without path', () => {
+    const Home = () => <div>Home</div>
+    const About = () => <div>About</div>
+    const Account = () => <div>Account</div>
+    const Other = () => <div>Other</div>
+
+    const history = createMemoryHistory({
+      initialEntries: ['/blah'],
+      initialIndex: 0,
+    })
+
+    const comp = mount(
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/account" component={Account} />
+          <Route component={Other} />
+        </Switch>
+      </Router>
+    )
+
+    expect(comp.text()).to.equal('Other')
+  })
 })

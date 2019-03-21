@@ -16,39 +16,38 @@ class TransitionSwitch extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     warning(
-      !(nextProps.location && !this.props.location),
+      !(prevProps.overrideLocation && !this.props.overrideLocation),
       '<TransitionSwitch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.'
     )
 
     warning(
-      !(!nextProps.location && this.props.location),
+      !(!prevProps.overrideLocation && this.props.overrideLocation),
       '<TransitionSwitch> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.'
     )
   }
 
   render() {
-    const { children, render, component, createKey, location, match: routeMatch } = this.props
+    const { children, render, component, createKey, match: routeMatch } = this.props
+    const location = this.props.overrideLocation || this.props.location
 
-    let match, child
-    React.Children.forEach(children, element => {
-      if (!React.isValidElement(element)) return
+    let match, element
+    React.Children.forEach(children, child => {
+      if (match == null && React.isValidElement(child)) {
+        const { path: pathProp, exact, strict, sensitive, from } = child.props
+        const path = pathProp || from
 
-      const { path: pathProp, exact, strict, sensitive, from } = element.props
-      const path = pathProp || from
-
-      if (match == null) {
-        child = element
+        element = child
         match = path ? matchPath(location.pathname, { path, exact, strict, sensitive }) : routeMatch
       }
     })
 
     const routeElement = match
-      ? React.cloneElement(child, {
+      ? React.cloneElement(element, {
         location,
         computedMatch: match,
-        key: createKey(child, match)
+        key: createKey(element, match)
       })
       : null
 
@@ -59,4 +58,10 @@ class TransitionSwitch extends React.Component {
   }
 }
 
-export default withRouter(TransitionSwitch)
+const TransitionSwitch2 = withRouter(TransitionSwitch)
+
+const TransitionSwitch3 = ({location, ...props}) => (
+  <TransitionSwitch2 overrideLocation={location} {...props} />
+)
+
+export default TransitionSwitch3
