@@ -25,9 +25,9 @@ import Fader from 'react-fader'
 
 This has several problems:
 1. All `<Switch>`es transition on every `location` change, even if:
-   a. only the last part of the URL changed and you only want the innermost nested `<Switch>` to transition
-   b. you have the same component for two different paths and don't want to transition that component
-   c. you don't want to transition in some case for any other reason
+   - only the last part of the URL changed and you only want the innermost nested `<Switch>` to transition
+   - you have the same component for two different paths and don't want to transition that component
+   - you don't want to transition in some case for any other reason
 2. You have to pass a `location` to the `<Switch>` for it to work
 
 `react-router-transition-switch` simplifies the above example to
@@ -46,9 +46,9 @@ import Fader from 'react-fader'
 ## Differences from `react-router`'s `<Switch>`:
 1. You can pass it a `component` or `render` prop.  It will use them to wrap the matched `<Route>` if given
 2. By default it clones the matched `<Route>` with `key={match.url}` unless you gave the `<Route>` a key yourself.
-   This way the `Fader` will only perform a transition when
-   a. if you provide `key`s yourself, the matched `<Route>` has a different `key` than the last
-   b. otherwise, the *matched portion* of the `location` is different from the last`
+   This way the `Fader` will only perform a transition when:
+   - if you provide `key`s yourself, the matched `<Route>` has a different `key` than the last
+   - otherwise, the *matched portion* of the `location` is different from the last`
 3. You can pass it a `createKey` prop, which is a function taking the `(route, match)`
    and returning the key to use.
 
