@@ -1,17 +1,29 @@
 # react-router-transition-switch
 
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/jcoreio/react-router-transition-switch.svg?branch=master)](https://travis-ci.org/jcoreio/react-router-transition-switch)
 [![Coverage Status](https://codecov.io/gh/jcoreio/react-router-transition-switch/branch/master/graph/badge.svg)](https://codecov.io/gh/jcoreio/react-router-transition-switch)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+=======
+[![CircleCI](https://circleci.com/gh/jedwards1211/react-karma-library-skeleton.svg?style=svg)](https://circleci.com/gh/jedwards1211/react-karma-library-skeleton)
+[![Coverage Status](https://codecov.io/gh/jedwards1211/react-karma-library-skeleton/branch/master/graph/badge.svg)](https://codecov.io/gh/jedwards1211/react-karma-library-skeleton)
 
+> > > > > > > efce907ce12dd371d4a4d038f8d6e782f3bada2b
+> > > > > > > [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) > > > > > > > [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) > > > > > > > [![npm version](https://badge.fury.io/js/es2015-library-skeleton.svg)](https://badge.fury.io/js/es2015-library-skeleton)
+
+<<<<<<< HEAD
 This is a variant of `<Switch>` that's much easier to use with transition components and solves some problems.
+=======
+This is my personal skeleton for creating a React library npm package with Karma tests. You are welcome to use it.
+
+> > > > > > > efce907ce12dd371d4a4d038f8d6e782f3bada2b
 
 The current recommended transition approach for `react-router` is
+
 ```js
 import {Route, Switch} from 'react-router-dom'
 import Fader from 'react-fader'
 
+<<<<<<< HEAD
 <Route render={({ location }) => (
   <Fader>
     <Switch key={location.key} location={location}>
@@ -24,6 +36,7 @@ import Fader from 'react-fader'
 ```
 
 This has several problems:
+
 1. All `<Switch>`es transition on every `location` change, even if:
    a. only the last part of the URL changed and you only want the innermost nested `<Switch>` to transition
    b. you have the same component for two different paths and don't want to transition that component
@@ -31,24 +44,25 @@ This has several problems:
 2. You have to pass a `location` to the `<Switch>` for it to work
 
 `react-router-transition-switch` simplifies the above example to
+
 ```js
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Switch from 'react-router-transition-switch'
 import Fader from 'react-fader'
-
-<Switch component={Fader}>
-  <Route path="/red" component={Red}/>
+;<Switch component={Fader}>
+  <Route path="/red" component={Red} />
   <Route path="/green" component={Green} />
   <Route path="/blue" component={Blue} />
 </Switch>
 ```
 
 ## Differences from `react-router`'s `<Switch>`:
-1. You can pass it a `component` or `render` prop.  It will use them to wrap the matched `<Route>` if given
+
+1. You can pass it a `component` or `render` prop. It will use them to wrap the matched `<Route>` if given
 2. By default it clones the matched `<Route>` with `key={match.url}` unless you gave the `<Route>` a key yourself.
    This way the `Fader` will only perform a transition when
    a. if you provide `key`s yourself, the matched `<Route>` has a different `key` than the last
-   b. otherwise, the *matched portion* of the `location` is different from the last`
+   b. otherwise, the _matched portion_ of the `location` is different from the last`
 3. You can pass it a `createKey` prop, which is a function taking the `(route, match)`
    and returning the key to use.
 
@@ -73,6 +87,7 @@ import Switch from 'react-router-transition-switch'
 ```
 
 For the location `/users/andy/profile`, the `<Switch>` will render:
+
 ```js
 <Fader>
   <Route key="/users/andy/profile" path="/users/:userId" component={User} />
@@ -80,7 +95,7 @@ For the location `/users/andy/profile`, the `<Switch>` will render:
 ```
 
 Notice that it makes `match.url` the `key` of the matched `<Route>`, so that `<Fader>` (or whatever transition component
-you use) knows to perform a transition.  If you provide custom `key`s on the `<Route>`s you pass to `<Switch>`, it won't
+you use) knows to perform a transition. If you provide custom `key`s on the `<Route>`s you pass to `<Switch>`, it won't
 overwrite them.
 
 ## `render` example
@@ -89,15 +104,17 @@ As with `<Route>`, you may pass a `render` function instead of a `component`:
 
 ```js
 <Router>
-  <Switch render={({children}) => (
-    <ReactCSSTransitionGroup
-      transitionName="example"
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}
-    >
-      {children}
-    </ReactCSSTransitionGroup>
-  )}>
+  <Switch
+    render={({ children }) => (
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+      >
+        {children}
+      </ReactCSSTransitionGroup>
+    )}
+  >
     ...
   </Switch>
 </Router>
@@ -105,7 +122,7 @@ As with `<Route>`, you may pass a `render` function instead of a `component`:
 
 ## Preventing transitions in certain cases
 
-If you want to prevent transitions between certain `<Route>`s, give them the same `key`.  This will not cause problems
+If you want to prevent transitions between certain `<Route>`s, give them the same `key`. This will not cause problems
 because `<Switch>` only renders one of the child `<Route>`s it was passed, so there will never be duplicate keys during
 React's reconciliation step.
 
@@ -138,3 +155,26 @@ every `match`:
 </Router>
 ```
 
+=======
+
+```sh
+npx 0-60 clone https://github.com/jedwards1211/react-karma-library-skeleton.git
+```
+
+## Tools used
+
+- babel 7
+- mocha
+- chai
+- eslint
+- flow
+- enzyme
+- karma
+- karma-webpack
+- karma-coverage
+- husky
+- semantic-release
+- renovate
+- Circle CI
+- Codecov.io
+  > > > > > > > efce907ce12dd371d4a4d038f8d6e782f3bada2b

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
-import {matchPath, withRouter} from 'react-router'
+import { matchPath, withRouter } from 'react-router'
 
 class TransitionSwitch extends React.Component {
   static propTypes = {
@@ -13,7 +13,7 @@ class TransitionSwitch extends React.Component {
   static defaultProps = {
     createKey(child, match) {
       return child.key != null ? child.key : match.url
-    }
+    },
   }
 
   componentDidUpdate(prevProps) {
@@ -29,7 +29,13 @@ class TransitionSwitch extends React.Component {
   }
 
   render() {
-    const { children, render, component, createKey, match: routeMatch } = this.props
+    const {
+      children,
+      render,
+      component,
+      createKey,
+      match: routeMatch,
+    } = this.props
     const location = this.props.overrideLocation || this.props.location
 
     let match, element
@@ -39,16 +45,18 @@ class TransitionSwitch extends React.Component {
         const path = pathProp || from
 
         element = child
-        match = path ? matchPath(location.pathname, { path, exact, strict, sensitive }) : routeMatch
+        match = path
+          ? matchPath(location.pathname, { path, exact, strict, sensitive })
+          : routeMatch
       }
     })
 
     const routeElement = match
       ? React.cloneElement(element, {
-        location,
-        computedMatch: match,
-        key: createKey(element, match)
-      })
+          location,
+          computedMatch: match,
+          key: createKey(element, match),
+        })
       : null
 
     const props = { location, match, children: routeElement }
@@ -60,7 +68,7 @@ class TransitionSwitch extends React.Component {
 
 const TransitionSwitch2 = withRouter(TransitionSwitch)
 
-const TransitionSwitch3 = ({location, ...props}) => (
+const TransitionSwitch3 = ({ location, ...props }) => (
   <TransitionSwitch2 overrideLocation={location} {...props} />
 )
 
