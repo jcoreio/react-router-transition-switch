@@ -1,19 +1,19 @@
 // @flow
 
 import * as React from 'react'
-import {mount} from 'enzyme'
-import {configure as configureEnzyme} from 'enzyme'
+import { mount, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-configureEnzyme({ adapter: new Adapter() })
-import {expect} from 'chai'
-import {createMemoryHistory} from 'history'
-import {Router, Route} from 'react-router-dom'
+import { expect } from 'chai'
+import { createMemoryHistory } from 'history'
+import { Router, Route } from 'react-router-dom'
 import Switch from '../src'
 import sinon from 'sinon'
 
+configure({ adapter: new Adapter() })
+
 describe('react-router-transition-switch', () => {
   it('render prop works', () => {
-    const render = sinon.spy(({children}) => children)
+    const render = sinon.spy(({ children }) => children)
 
     const Home = () => <div>Home</div>
     const About = () => <div>About</div>
@@ -42,7 +42,7 @@ describe('react-router-transition-switch', () => {
     expect(render.args[0][0].location.pathname).to.equal('/account/profile')
   })
   it("doesn't overwrite existing route keys", () => {
-    const render = sinon.spy(({children}) => children)
+    const render = sinon.spy(({ children }) => children)
 
     const Home = () => <div>Home</div>
     const About = () => <div>About</div>
@@ -67,7 +67,7 @@ describe('react-router-transition-switch', () => {
     expect(render.args[0][0].children.key).to.equal('2')
   })
   it('uses provided createKey function if given', () => {
-    const render = sinon.spy(({children}) => children)
+    const render = sinon.spy(({ children }) => children)
 
     const Home = () => <div>Home</div>
     const About = () => <div>About</div>
@@ -92,7 +92,7 @@ describe('react-router-transition-switch', () => {
     expect(render.args[0][0].children.key).to.equal('4')
   })
   it('component prop works', () => {
-    const render = sinon.spy(({children}) => children)
+    const render = sinon.spy(({ children }) => children)
 
     const Home = () => <div>Home</div>
     const About = () => <div>About</div>
@@ -153,7 +153,7 @@ describe('react-router-transition-switch', () => {
 
     const comp = mount(
       <Router history={history}>
-        <Switch location={{pathname: "/about"}}>
+        <Switch location={{ pathname: '/about' }}>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/account" component={Account} />
@@ -183,7 +183,7 @@ describe('react-router-transition-switch', () => {
       </Router>
     )
 
-    expect(() => comp.text()).to.throw(Error)
+    expect(comp.text()).to.equal('')
   })
   it('supports child <Route> without path', () => {
     const Home = () => <div>Home</div>
