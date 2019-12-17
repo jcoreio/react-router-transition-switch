@@ -14,17 +14,19 @@ The current recommended transition approach for `react-router` is
 import { Route, Switch } from 'react-router-dom'
 import Fader from 'react-fader'
 
-;<Route
-  render={({ location }) => (
-    <Fader>
-      <Switch key={location.key} location={location}>
-        <Route path="/red" component={Red} />
-        <Route path="/green" component={Green} />
-        <Route path="/blue" component={Blue} />
-      </Switch>
-    </Fader>
-  )}
-/>
+const MyRoute = () => (
+  <Route
+    render={({ location }) => (
+      <Fader>
+        <Switch key={location.key} location={location}>
+          <Route path="/red" component={Red} />
+          <Route path="/green" component={Green} />
+          <Route path="/blue" component={Blue} />
+        </Switch>
+      </Fader>
+    )}
+  />
+)
 ```
 
 This has several problems:
@@ -41,11 +43,14 @@ This has several problems:
 import { Route } from 'react-router-dom'
 import Switch from 'react-router-transition-switch'
 import Fader from 'react-fader'
-;<Switch component={Fader}>
-  <Route path="/red" component={Red} />
-  <Route path="/green" component={Green} />
-  <Route path="/blue" component={Blue} />
-</Switch>
+
+const MyRoute = () => (
+  <Switch component={Fader}>
+    <Route path="/red" component={Red} />
+    <Route path="/green" component={Green} />
+    <Route path="/blue" component={Blue} />
+  </Switch>
+)
 ```
 
 ## Differences from `react-router`'s `<Switch>`:
@@ -62,20 +67,21 @@ import Fader from 'react-fader'
 
 ```js
 import React from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Fader from 'react-fader'
 import Switch from 'react-router-transition-switch'
 
-...
-
-<Router>
-<Switch component={Fader}>
-<Route exact path="/" component={Home} />
-<Route path="/about" component={About} />
-<Route path="/account" component={Account} />
-<Route path="/users/:userId" component={User} />
-</Switch>
-</Router>
+// ...
+const MyRoute = () => (
+  <Router>
+    <Switch component={Fader}>
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/account" component={Account} />
+      <Route path="/users/:userId" component={User} />
+    </Switch>
+  </Router>
+)
 ```
 
 For the location `/users/andy/profile`, the `<Switch>` will render:
