@@ -61,7 +61,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jedwards1211/react-karma-library-skeleton.git"
+    "url": "https://github.com/jcoreio/react-router-transition-switch.git"
   },
   "keywords": [
     "react-router",
