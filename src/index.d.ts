@@ -1,5 +1,10 @@
 import * as React from 'react'
-import { Route, RouteProps, SwitchProps, match } from 'react-router'
+import {
+  Route,
+  RouteProps,
+  SwitchProps as BaseSwitchProps,
+  match,
+} from 'react-router'
 import { Location } from 'history'
 
 export type RenderProps = {
@@ -8,7 +13,7 @@ export type RenderProps = {
   children: React.ReactElement | null
 }
 
-export type Props = SwitchProps & {
+export type SwitchProps = BaseSwitchProps & {
   createKey?: (
     route: React.ReactElement<RouteProps, typeof Route>,
     match: match
@@ -16,3 +21,6 @@ export type Props = SwitchProps & {
   component?: React.ComponentType<RenderProps>
   render?: (props: RenderProps) => React.ReactElement | null
 }
+
+declare const Switch: React.ComponentType<SwitchProps>
+export default Switch
