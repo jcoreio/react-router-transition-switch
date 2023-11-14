@@ -39,7 +39,7 @@ class TransitionSwitch extends React.Component {
     const location = this.props.overrideLocation || this.props.location
 
     let match, element
-    React.Children.forEach(children, child => {
+    React.Children.forEach(children, (child) => {
       if (match == null && React.isValidElement(child)) {
         const { path: pathProp, exact, strict, sensitive, from } = child.props
         const path = pathProp || from

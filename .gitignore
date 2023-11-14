@@ -1,9 +1,4 @@
+/dist
 .nyc_output
-coverage
 node_modules
-lib
-es
-.eslintcache
-/*.js
-/*.js.flow
-!/.babelrc.js
+/coverage

@@ -80,7 +80,7 @@ describe('react-router-transition-switch', () => {
 
     const comp = mount(
       <Router history={history}>
-        <Switch render={render} createKey={child => child.key * 2}>
+        <Switch render={render} createKey={(child) => child.key * 2}>
           <Route key={0} exact path="/" component={Home} />
           <Route key={1} path="/about" component={About} />
           <Route key={2} path="/account" component={Account} />
